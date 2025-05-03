@@ -1,7 +1,7 @@
 # HSI_Lidar_SAR_multimodal_fusion_calssification_toolkit
 
 
-Code source: 
+Code and Paper source: 
 - [HCTNet](https://github.com/zgr6010/Fusion_HCT) [Paper](https://ieeexplore.ieee.org/document/9999457)
 - [FusAtNet](https://github.com/ShivamP1993/FusAtNet-Dual-Attention-based-SpectroSpatial-Multimodal-Fusion-Network-for-Hyperspectral-and-LiDAR-)
 - [S2ENet](https://github.com/likyoo/Multimodal-Remote-Sensing-Toolkit)
