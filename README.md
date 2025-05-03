@@ -10,6 +10,8 @@ Code and Paper source:
 - [MIViT](https://github.com/icey-zhang/MIViT)
 - [MS2CANet](https://github.com/junhengzhu/MS2CANet)
 - [SHNet](https://github.com/quanweiliu/SHNet)
+
+  
 This repository proposed a new taxonomy to descibe existed patch based image classification (semantic segmenation) models.
 
 Based the input and output of the model, we categorized these pixel-level classification model into singlesacle singlemodality input and singleoutput (SSISO), singlesacle multimodelity input and singleoutput (SMISO), singlesacle multimodelity input and multioutput (SMIMO), mutlisacle multimodelity input and singleoutput (MMISO), mutlisacle multimodelity input and multiouput (MMIMO).
