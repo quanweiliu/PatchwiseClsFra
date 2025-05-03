@@ -7,6 +7,7 @@ Code and Paper source:
 - [S2ENet](https://github.com/likyoo/Multimodal-Remote-Sensing-Toolkit)
 - [MIViT](https://github.com/icey-zhang/MIViT)
 - [MS2CANet](https://github.com/junhengzhu/MS2CANet)
+- [SHNet](https://github.com/quanweiliu/SHNet)
 
 This repository proposed a new taxonomy to descibe existed patch based image classification (semantic segmenation) models.
 
