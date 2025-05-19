@@ -17,7 +17,7 @@ Code and Paper source:
 | ----------- | ----------- |----------- |----------- |
 | [EndNet](https://github.com/danfenghong/IEEE_GRSL_EndNet)      | Title       | Title       | Title       |
 | [MDL](https://github.com/danfenghong/IEEE_TGRS_MDL-RS)   | Text        | Title       |
-| [HCTNet](https://github.com/zgr6010/Fusion_HCT)   | [Paper](https://ieeexplore.ieee.org/document/9999457)        | Title       | Title       |
+| [HCTNet](https://github.com/zgr6010/Fusion_HCT)   | [Paper](https://ieeexplore.ieee.org/document/9999457)        | TGRS       | 2022       |
 | [FusAtNet](https://github.com/ShivamP1993/FusAtNet-Dual-Attention-based-SpectroSpatial-Multimodal-Fusion-Network-for-Hyperspectral-and-LiDAR-)   | Text        | CVPR        | 2020       |
 | [S2ENet](https://github.com/likyoo/Multimodal-Remote-Sensing-Toolkit)   | Text        | Title       | Title       |
 | [Cross-HL](https://github.com/AtriSukul1508/Cross-HL)  | [Paper](https://ieeexplore-ieee-org.elibrary.jcu.edu.au/document/10462184)        | Title       | Title       |
