@@ -1,0 +1,7 @@
+/result
+/pretrain
+/__pycache__/
+*.pyc
+*.pth
+
+	
