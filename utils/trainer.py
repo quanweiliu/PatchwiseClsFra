@@ -356,11 +356,10 @@ def train_SMIMO(epoch, net, superhead, criterion, train_loader, test_loader, opt
                 out_e1, out_e2, out_e3 = superhead(_out1, _out2)
                 out_e = out_e1 + out_e2 + out_e3
                 test_loss = criterion(out_e, t_label)
-
                 t_pred = out_e.data.max(1, keepdim=True)[1]
+
                 test_correct += t_pred.eq(t_label.data.view_as(t_pred)).cpu().sum()
                 test_accuracy = 100. * test_correct.item() / len(test_loader.dataset)
-
                 total_test_loss += test_loss.item()  # 累计 batch 的损失
     else:
         test_accuracy = 0.0
