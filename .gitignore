@@ -4,4 +4,4 @@
 *.pyc
 *.pth
 *.ipynb
-	
+*.gitignore
