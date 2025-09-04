@@ -78,3 +78,30 @@ Noting:
 
 I have collected a range of models based this taxonomy. If you want to contribute this repository and make it better, feel free to contact me. My emial : quanwei.liu@my.jcu.edu.au
 
+# Reference
+
+You may want to cite:
+
+```
+@article{liu2025pixels,
+  title={From Pixels to Images: Deep Learning Advances in Remote Sensing Image Semantic Segmentation},
+  author={Liu, Quanwei and Huang, Tao and Dong, Yanni and Yang, Jiaqi and Xiang, Wei},
+  journal={arXiv preprint arXiv:2505.15147},
+  year={2025}
+}
+
+@article{liu2025enhancing,
+  title={Enhancing oil spill detection with controlled random sampling: A multimodal fusion approach using SAR and HSI imagery},
+  author={Liu, Quanwei and Huang, Tao and Dong, Yanni and Xiang, Wei},
+  journal={Remote Sensing Applications: Society and Environment},
+  pages={101601},
+  year={2025},
+  publisher={Elsevier}
+}
+```
+
+
+
+### License
+
+Code in this repo is for non-commercial use only.

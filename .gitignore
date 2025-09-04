@@ -1,5 +1,5 @@
 /result
-/pretrain
+/pretrained
 /__pycache__/
 *.pyc
 *.pth
