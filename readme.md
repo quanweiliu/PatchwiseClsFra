@@ -18,7 +18,7 @@
 | [Cross-HL](https://github.com/AtriSukul1508/Cross-HL)  | [Cross Hyperspectral and LiDAR Attention Transformer: An Extended Self-Attention for Land Use and Land Cover Classification](https://ieeexplore-ieee-org.elibrary.jcu.edu.au/document/10462184)        | TGRS       | 2024       |
 | [MIViT](https://github.com/icey-zhang/MIViT)   | [Multimodal Informative ViT: Information Aggregation and Distribution for Hyperspectral and LiDAR Classification](https://ieeexplore-ieee-org.elibrary.jcu.edu.au/document/10464367)        | TCSVT       | 2024       |
 | [MS2CANet](https://github.com/junhengzhu/MS2CANet)   | [MS2CANet: Multiscale Spatial–Spectral Cross-Modal Attention Network for Hyperspectral Image and LiDAR Classification](https://ieeexplore-ieee-org.elibrary.jcu.edu.au/document/10382694/)        | TGRSL       | 2024       | 
-| [SHNet](https://github.com/quanweiliu/SHNet)   | Enhancing Oil Spill Detection with Controlled Random Sampling: A Multimodal Fusion Approach Using SAR and HSI Imagery        | RSA       | 2025       |
+| [SHNet](https://github.com/quanweiliu/SHNet)   | [Enhancing Oil Spill Detection with Controlled Random Sampling: A Multimodal Fusion Approach Using SAR and HSI Imagery](https://www.sciencedirect.com/science/article/pii/S2352938525001545)        | RSA       | 2025       |
 
 # Description
 This repository proposed a new taxonomy to descibe existed patch based image classification (semantic segmenation) models.
