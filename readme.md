@@ -9,6 +9,7 @@
 | [morphFormer](https://github.com/mhaut/morphFormer)      | [Spectral–Spatial Morphological Attention Transformer for Hyperspectral Image Classification](https://ieeexplore-ieee-org.elibrary.jcu.edu.au/document/10036472)       | TGRS       | 2023      
 | [ViT-DGCN](https://github.com/quanweiliu/ViT-DGCN)      | [Fusion of GaoFen-5 and Sentinel-2B data for lithological mapping using vision transformer dynamic graph convolutional network](https://www.sciencedirect.com/science/article/pii/S1569843224001341)       | JAG       | 2024       |
 | [DBCTNet](https://github.com/xurui-joei/DBCTNet)      | [DBCTNet: Double Branch Convolution-Transformer Network for Hyperspectral Image Classification](https://ieeexplore-ieee-org.elibrary.jcu.edu.au/document/10440601)       | TGRS       | 2024       | 
+| [DSFormer](https://github.com/YichuXu/DSFormer)   | [Dual Selective Fusion Transformer Network for Hyperspectral Image Classification](https://www.sciencedirect.com/science/article/pii/S089360802500190X)        | NN       | 2025       |
 ||**Multimodal models**||
 | [EndNet](https://github.com/danfenghong/IEEE_GRSL_EndNet)      | [Deep Encoder-Decoder Networks for Classification of Hyperspectral and LiDAR Data](https://ieeexplore-ieee-org.elibrary.jcu.edu.au/document/9179756)       | TGRSL       | 2020       |
 | [MDL](https://github.com/danfenghong/IEEE_TGRS_MDL-RS)   | [More Diverse Means Better: Multimodal Deep Learning Meets Remote-Sensing Imagery Classification](https://ieeexplore.ieee.org/document/9174822)        | TGRS       |  2021 |
@@ -19,7 +20,7 @@
 | [MIViT](https://github.com/icey-zhang/MIViT)   | [Multimodal Informative ViT: Information Aggregation and Distribution for Hyperspectral and LiDAR Classification](https://ieeexplore-ieee-org.elibrary.jcu.edu.au/document/10464367)        | TCSVT       | 2024       |
 | [MS2CANet](https://github.com/junhengzhu/MS2CANet)   | [MS2CANet: Multiscale Spatial–Spectral Cross-Modal Attention Network for Hyperspectral Image and LiDAR Classification](https://ieeexplore-ieee-org.elibrary.jcu.edu.au/document/10382694/)        | TGRSL       | 2024       | 
 | [SHNet](https://github.com/quanweiliu/SHNet)   | [Enhancing Oil Spill Detection with Controlled Random Sampling: A Multimodal Fusion Approach Using SAR and HSI Imagery](https://www.sciencedirect.com/science/article/pii/S2352938525001545)        | RSA       | 2025       |
-| [DSFormer](https://github.com/YichuXu/DSFormer)   | [Dual Selective Fusion Transformer Network for Hyperspectral Image Classification](https://www.sciencedirect.com/science/article/pii/S089360802500190X)        | NN       | 2025       |
+
 
 # Description
 This repository proposed a new taxonomy to descibe existed patch based image classification (semantic segmenation) models.
