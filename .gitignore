@@ -1,10 +1,9 @@
 /result
 /pretrained
-/__pycache__/
+
+*/__pycache__/
+*/.idea/
 *.pyc
 *.pth
 *.ipynb
 *.gitignore
-
-
-*.ipynb
