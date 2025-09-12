@@ -19,6 +19,7 @@
 | [MIViT](https://github.com/icey-zhang/MIViT)   | [Multimodal Informative ViT: Information Aggregation and Distribution for Hyperspectral and LiDAR Classification](https://ieeexplore-ieee-org.elibrary.jcu.edu.au/document/10464367)        | TCSVT       | 2024       |
 | [MS2CANet](https://github.com/junhengzhu/MS2CANet)   | [MS2CANet: Multiscale Spatial–Spectral Cross-Modal Attention Network for Hyperspectral Image and LiDAR Classification](https://ieeexplore-ieee-org.elibrary.jcu.edu.au/document/10382694/)        | TGRSL       | 2024       | 
 | [SHNet](https://github.com/quanweiliu/SHNet)   | [Enhancing Oil Spill Detection with Controlled Random Sampling: A Multimodal Fusion Approach Using SAR and HSI Imagery](https://www.sciencedirect.com/science/article/pii/S2352938525001545)        | RSA       | 2025       |
+| [DSFormer](https://github.com/YichuXu/DSFormer)   | [Dual Selective Fusion Transformer Network for Hyperspectral Image Classification](https://www.sciencedirect.com/science/article/pii/S089360802500190X)        | NN       | 2025       |
 
 # Description
 This repository proposed a new taxonomy to descibe existed patch based image classification (semantic segmenation) models.
