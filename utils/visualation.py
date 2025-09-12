@@ -49,8 +49,8 @@ def visualation_SD_SSISO(net, net_head, data_loader, args, groundTruth=None, vis
 
         draw(predict_labels, os.path.join(args.result_dir, str(round(test_accuracy.item(), 4)) + "_label")) 
 
-        savemat(os.path.join(args.result_dir, args.dataset_name + "_gt.mat"), \
-                {args.dataset_name + '_gt': predict_labels})
+        # savemat(os.path.join(args.result_dir, args.dataset_name + "_gt.mat"), \
+        #         {args.dataset_name + '_gt': predict_labels})
         
 
 def visualation_SD_SSISO2(net, data_loader, args, groundTruth=None, visulation=False):
@@ -94,8 +94,8 @@ def visualation_SD_SSISO2(net, data_loader, args, groundTruth=None, visulation=F
 
         draw(predict_labels, os.path.join(args.result_dir, str(round(test_accuracy.item(), 4)) + "_label")) 
 
-        savemat(os.path.join(args.result_dir, args.dataset_name + "_gt.mat"), \
-                {args.dataset_name + '_gt': predict_labels})
+        # savemat(os.path.join(args.result_dir, args.dataset_name + "_gt.mat"), \
+        #         {args.dataset_name + '_gt': predict_labels})
         
 
 # def visualation_SSISO(net, net_head, data_loader, args, groundTruth=None, visulation=False):
@@ -186,8 +186,8 @@ def visualation_SMIMO(net, superhead, data_loader, args, groundTruth=None, visul
 
         draw(predict_labels, os.path.join(args.result_dir, str(round(test_accuracy.item(), 4)) + "_label"))    
 
-        savemat(os.path.join(args.result_dir, args.dataset_name + "_gt.mat"), \
-                {args.dataset_name + '_gt': predict_labels})
+        # savemat(os.path.join(args.result_dir, args.dataset_name + "_gt.mat"), \
+        #         {args.dataset_name + '_gt': predict_labels})
         
 # def visualation_SMIMO(net, criterion, data_loader, args, groundTruth=None, visulation=False):
     
@@ -284,8 +284,8 @@ def visualation_SMIMO2(net, data_loader, args, groundTruth=None, visulation=Fals
 
         draw(predict_labels, os.path.join(args.result_dir, str(round(test_accuracy.item(), 4)) + "_label"))    
 
-        savemat(os.path.join(args.result_dir, args.dataset_name + "_gt.mat"), \
-                {args.dataset_name + '_gt': predict_labels})
+        # savemat(os.path.join(args.result_dir, args.dataset_name + "_gt.mat"), \
+        #         {args.dataset_name + '_gt': predict_labels})
         
 def visualation_SMIMO3(net, data_loader, args, groundTruth=None, visulation=False):
     
@@ -329,8 +329,8 @@ def visualation_SMIMO3(net, data_loader, args, groundTruth=None, visulation=Fals
 
         draw(predict_labels, os.path.join(args.result_dir, str(round(test_accuracy.item(), 4)) + "_label"))    
 
-        savemat(os.path.join(args.result_dir, args.dataset_name + "_gt.mat"), \
-                {args.dataset_name + '_gt': predict_labels})
+        # savemat(os.path.join(args.result_dir, args.dataset_name + "_gt.mat"), \
+        #         {args.dataset_name + '_gt': predict_labels})
         
 def visualation_SMISO(net, data_loader, args, groundTruth=None, visulation=False):
     
@@ -374,8 +374,8 @@ def visualation_SMISO(net, data_loader, args, groundTruth=None, visulation=False
 
         draw(predict_labels, os.path.join(args.result_dir, str(round(test_accuracy.item(), 4)) + "_label"))    
 
-        savemat(os.path.join(args.result_dir, args.dataset_name + "_gt.mat"), \
-                {args.dataset_name + '_gt': predict_labels})
+        # savemat(os.path.join(args.result_dir, args.dataset_name + "_gt.mat"), \
+        #         {args.dataset_name + '_gt': predict_labels})
         
 def visualation_MMISO(net, data_loader, args, groundTruth=None, visulation=False):
     
@@ -423,8 +423,8 @@ def visualation_MMISO(net, data_loader, args, groundTruth=None, visulation=False
 
         draw(predict_labels, os.path.join(args.result_dir, str(round(test_accuracy.item(), 4)) + "_label"))    
 
-        savemat(os.path.join(args.result_dir, args.dataset_name + "_gt.mat"), \
-                {args.dataset_name + '_gt': predict_labels})
+        # savemat(os.path.join(args.result_dir, args.dataset_name + "_gt.mat"), \
+        #         {args.dataset_name + '_gt': predict_labels})
         
 def visualation_MMIMO(net, data_loader, args, groundTruth=None, visulation=False):
     
@@ -484,8 +484,8 @@ def visualation_MMIMO(net, data_loader, args, groundTruth=None, visulation=False
 
         draw(predict_labels, os.path.join(args.result_dir, str(round(test_accuracy.item(), 4)) + "_label"))    
 
-        savemat(os.path.join(args.result_dir, args.dataset_name + "_gt.mat"), \
-                {args.dataset_name + '_gt': predict_labels})
+        # savemat(os.path.join(args.result_dir, args.dataset_name + "_gt.mat"), \
+        #         {args.dataset_name + '_gt': predict_labels})
         
 
 def draw(label, name, scale: float = 4.0, dpi: int = 400, save_img=True):

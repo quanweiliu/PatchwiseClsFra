@@ -162,6 +162,18 @@ class_num = np.max(train_gt)
 print(class_num, train_gt.shape, len(train_loader.dataset))
 
 
+args.result_dir = os.path.join("/home/icclab/Documents/lqw/Multimodal_Classification/PatchwiseClsFra/result_PU_SD",
+                    datetime.now().strftime("%m-%d-%H-%M-") + args.backbone)
+print(args.result_dir)
+
+# 加载已有权重路径
+# args.result_dir = "/home/liuquanwei/code/DMVL_joint_MNDIS/results_final/08-09-17-05-vit_D8"
+if not os.path.exists(args.result_dir):
+    os.mkdir(args.result_dir)
+with open(args.result_dir + '/args.json', 'w') as fid:
+    json.dump(args.__dict__, fid, indent=2)
+
+
 criterion = torch.nn.CrossEntropyLoss()
 super_head = None
 
@@ -267,7 +279,7 @@ test_accuracies = []
 
 total_train_time = time.time()
 
-for epoch in range(epoch_start, args.epochs):
+for epoch in range(0, args.epochs):
     
     if args.backbone in args.SSISO:
         train_loss, train_accuracy, test_loss, test_accuracy, train_time \

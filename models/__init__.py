@@ -128,6 +128,24 @@ def get_model_config(args):
 		args.step_size = 30
 		args.gamma = 0.7
 
+	elif args.backbone == "DSFormer":
+		args.epochs = 500
+		args.batch_size = 256
+		args.patch_size = 10
+		args.pca = True
+		args.components = 30
+		args.schedule = False
+		args.learning_rate = 0.0001
+		args.weight_decay = 0.00001
+		args.ps = 2
+		args.kernel_size = 3
+		args.emb_dim = 128
+		args.num_heads = 8
+		args.group_num = 4
+		# args.k = '2/5'   # UP
+		args.k = '3/5'   # IP
+		# args.k = '4/5'   # houston13 / whuhh 
+
 	elif args.backbone == "MDL_M" or args.backbone == "MDL_L" or \
 		args.backbone == "MDL_E_D" or args.backbone == "MDL_C":
 		args.epochs = 150

@@ -5,3 +5,6 @@
 *.pth
 *.ipynb
 *.gitignore
+
+
+*.ipynb

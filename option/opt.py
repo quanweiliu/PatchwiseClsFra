@@ -33,8 +33,7 @@ def get_args():
     parser.add_argument('--distillation', type=int, default=1, help='distillation') #是否加蒸馏
 
     
-    
-    parser.add_argument('--SD',  nargs='+', default=["PaviaU", "Salinas", "Dioni", 'MelasChasma', 'GaleCrater', 'CopratesChasma'], 
+    parser.add_argument('--SD',  nargs='+', default=["IndianPines", "PaviaU", "Salinas", "Dioni", 'MelasChasma', 'GaleCrater', 'CopratesChasma'], 
                         help='SingleModality data')
     parser.add_argument('--MD',  nargs='+', default=["Houston_2013", "Houston_2018", "Augsburg", "Berlin"], 
                         help='MultiModality data')
@@ -43,7 +42,7 @@ def get_args():
     parser.add_argument('--SSISO',  nargs='+', default=["vit", 'cnn', 'mamba'], 
                         help='singlesacle singlemodality input and singleoutput')
     parser.add_argument('--SSISO2',  nargs='+', default=['ViTDGCN', 'FDGC', "SSFTTnet", \
-                                                         "morphFormer", "DBCTNet"], 
+                                                         "morphFormer", "DBCTNet", "DSFormer"], 
                         help='singlesacle singlemodality input and singleoutput')
     
 
@@ -83,7 +82,7 @@ def get_args():
 
 
     parser.add_argument('--save-results', action='store_true', default=True)
-    parser.add_argument('--path_head', default='/home/leo/Oil_Spill_Detection/SHNet', 
+    parser.add_argument('--path_head', default='', 
                         type=str, help='path to cache (default: none)')
     parser.add_argument('--path_result_dir', type=str, default='')
 

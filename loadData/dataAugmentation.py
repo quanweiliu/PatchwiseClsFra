@@ -39,3 +39,19 @@ def dataAugmentation(args):
     return transform
 
 
+def dataAugmentation2():
+
+    transform = transforms.Compose([
+        # 其他可能的前置变换，比如 Resize
+        # ...
+
+        # 核心部分：从以下列表中随机选择一个变换来应用
+        transforms.RandomChoice([
+            transforms.RandomHorizontalFlip(p=1),  # 注意这里 p=1
+            transforms.RandomVerticalFlip(p=1),    # 注意这里 p=1
+            transforms.RandomRotation(degrees=(90, 90)),
+            transforms.RandomRotation(degrees=(180, 180)),
+            transforms.RandomRotation(degrees=(270, 270)),
+        ])
+    ])
+    return transform

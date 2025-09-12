@@ -24,7 +24,7 @@ def get_data(args):
 
     if args.dataset_name in args.SD:
         data, GT = data_reader.load_data(args.dataset_name, path_data=args.path_data, type_data=None)
-        # print("data", data.shape, "data_gt", data_gt.shape)
+        print("data", data.shape, "GT", GT.shape, np.max(data), np.min(data))
 
 
         if args.backbone in args.MMISO or args.backbone in args.MMIMO:
@@ -49,7 +49,7 @@ def get_data(args):
         train_gt, test_gt = sample_gt(data_gt, train_num=args.train_num, 
                                 train_ratio=args.train_ratio, mode=args.split_type)
         train_gt, val_gt = sample_gt(train_gt, train_num=args.train_num, 
-                                train_ratio=0.5, mode="ratio")
+                                train_ratio=0, mode="ratio")
         # print("train_gt", train_gt.shape, "test_gt", test_gt.shape)
 
 

@@ -55,23 +55,36 @@ class DataReader():
     @property
     def normal_cube(self):
         """
-        Unit-norm normalization / L2 normalization
+        come from DSFormer
         """
         self.data_cube = self.data_cube.astype(np.float32)
-
-        m, n, d = self.data_cube.shape
-        self.data_cube = self.data_cube.reshape((m*n, -1))
-        self.data_cube = self.data_cube / self.data_cube.max()
-
-        img_temp = np.sqrt(np.asarray((self.data_cube**2).sum(1)))
-        img_temp = np.expand_dims(img_temp,axis=1)
-        img_temp = img_temp.repeat(d,axis=1)
-        img_temp[img_temp == 0] = 1
-
-        self.data_cube = self.data_cube / img_temp
-        self.data_cube = np.reshape(self.data_cube, (m, n, -1))
-
+        self.data_cube = (self.data_cube - np.min(self.data_cube)) / (np.max(self.data_cube) - np.min(self.data_cube))
+        mean_by_c = np.mean(self.data_cube, axis=(0, 1))
+        for c in range(self.data_cube.shape[-1]):
+            self.data_cube[:, :, c] = self.data_cube[:, :, c] - mean_by_c[c]
         return self.data_cube
+    
+    # @property
+    # def normal_cube(self):
+    #     """
+    #     Unit-norm normalization / L2 normalization
+    #     come from morphFormer
+    #     """
+    #     self.data_cube = self.data_cube.astype(np.float32)
+
+    #     m, n, d = self.data_cube.shape
+    #     self.data_cube = self.data_cube.reshape((m*n, -1))
+    #     self.data_cube = self.data_cube / self.data_cube.max()
+
+    #     img_temp = np.sqrt(np.asarray((self.data_cube**2).sum(1)))
+    #     img_temp = np.expand_dims(img_temp,axis=1)
+    #     img_temp = img_temp.repeat(d,axis=1)
+    #     img_temp[img_temp == 0] = 1
+
+    #     self.data_cube = self.data_cube / img_temp
+    #     self.data_cube = np.reshape(self.data_cube, (m, n, -1))
+
+    #     return self.data_cube
 
 class DataReader2():
     def __init__(self):
@@ -191,9 +204,9 @@ class IndianRaw(DataReader):
     def __init__(self, path_data=None):
         super(IndianRaw, self).__init__()
 
-        raw_data_package = sio.loadmat(path_data + "Indian_pines_corrected.mat")
+        raw_data_package = sio.loadmat(os.path.join(path_data, "Indian_pines_corrected.mat"))
         self.data_cube = raw_data_package["data"]
-        truth = sio.loadmat(path_data + "Indian_pines_gt.mat")
+        truth = sio.loadmat(os.path.join(path_data, "Indian_pines_gt.mat"))
         self.g_truth = truth["groundT"]
 
 
@@ -578,7 +591,8 @@ def load_data(dataset="IndianPines", path_data=None, type_data=None):
 def apply_PCA(data, num_components=75):
     new_data = np.reshape(data, (-1, data.shape[2]))
 
-    pca = PCA(n_components=num_components, whiten=True)
+    # pca = PCA(n_components=num_components, whiten=True)
+    pca = PCA(n_components=num_components)
     new_data = pca.fit_transform(new_data)
 
     # pca = FastICA(n_components=num_components, random_state=42)
