@@ -64,6 +64,8 @@ def get_args():
                         help='mutlisacle multimodelity input and multiouput')   
 
     parser.add_argument('--epochs', type=int, default=100)
+    parser.add_argument('--early_stop', type=str, default="False")
+    parser.add_argument('--early_stopping_patience', type=int, default=30)
     parser.add_argument('--batch_size', type=int, default=64)
     parser.add_argument('--learning_rate', type=float, default=0.001)
     parser.add_argument('--weight_decay', type=float, default=0.001)

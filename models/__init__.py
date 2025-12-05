@@ -130,6 +130,7 @@ def get_model_config(args):
 
 	elif args.backbone == "DSFormer":
 		args.epochs = 500
+		args.early_stop = "True"
 		args.batch_size = 256
 		args.patch_size = 10
 		args.pca = True
@@ -142,8 +143,8 @@ def get_model_config(args):
 		args.emb_dim = 128
 		args.num_heads = 8
 		args.group_num = 4
-		# args.k = '2/5'   # UP
-		args.k = '3/5'   # IP
+		args.k = '2/5'   # UP
+		# args.k = '3/5'   # IP
 		# args.k = '4/5'   # houston13 / whuhh 
 
 	elif args.backbone == "MDL_M" or args.backbone == "MDL_L" or \

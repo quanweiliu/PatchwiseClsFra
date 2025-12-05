@@ -49,7 +49,7 @@ def get_data(args):
         train_gt, test_gt = sample_gt(data_gt, train_num=args.train_num, 
                                 train_ratio=args.train_ratio, mode=args.split_type)
         train_gt, val_gt = sample_gt(train_gt, train_num=args.train_num, 
-                                train_ratio=0, mode="ratio")
+                                train_ratio=0.9, mode="ratio")
         # print("train_gt", train_gt.shape, "test_gt", test_gt.shape)
 
 
