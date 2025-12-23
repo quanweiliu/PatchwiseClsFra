@@ -1,0 +1,6 @@
+# ninja log v7
+0	14820	1766379611765288827	/home/icclab/Documents/lqw/Multimodal_Classification/EMamba/mamba/selective_scan_mu/build/temp.linux-x86_64-cpython-39/csrc/selective_scan/selective_scan.o	ca226165407727fe
+0	15508	1766379611765288827	/home/icclab/Documents/lqw/Multimodal_Classification/EMamba/mamba/selective_scan_mu/build/temp.linux-x86_64-cpython-39/csrc/selective_scan/selective_scan_core_fwd2.o	9ae0e47644e02bfb
+0	20450	1766379611765288827	/home/icclab/Documents/lqw/Multimodal_Classification/EMamba/mamba/selective_scan_mu/build/temp.linux-x86_64-cpython-39/csrc/selective_scan/selective_scan_core_fwd3.o	bb589c49ce8967ff
+0	26177	1766379611765288827	/home/icclab/Documents/lqw/Multimodal_Classification/EMamba/mamba/selective_scan_mu/build/temp.linux-x86_64-cpython-39/csrc/selective_scan/selective_scan_core_fwd4.o	b88c13ffae8f5dfa
+0	40945	1766379611765288827	/home/icclab/Documents/lqw/Multimodal_Classification/EMamba/mamba/selective_scan_mu/build/temp.linux-x86_64-cpython-39/csrc/selective_scan/selective_scan_core.o	1d736833d24c3230

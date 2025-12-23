@@ -22,10 +22,10 @@ from loadData import data_pipe
 from loadData.dataAugmentation import dataAugmentation
 
 # SD models
-from models import CNNs, vision_transformer, mamba
+from models import CNNs, vision_transformer
 from models import ViTDGCN, FDGC, DBCTNet
 from models import SSFTTnet, morphFormer
-from transformers import get_cosine_schedule_with_warmup
+# from transformers import get_cosine_schedule_with_warmup
 
 # MD models
 from models import S2ENet, FusAtNet, SHNet, heads, MDL
@@ -35,16 +35,18 @@ from models.CrossHL import CrossHL
 from models.HCTNet import HCTNet
 from models.DSHFNet import DSHF
 from models.MIViT import MMA
+from models.mamba.vmamba import MultimodalClassier
 from models import get_model_config
 
 from utils import trainer, tester, focalLoss, tools, visualation
+from utils import cosine_schedule_with_warmup
 
 
 
 args = opt.get_args()
-args.dataset_name = "PaviaU"
+# args.dataset_name = "PaviaU"
 # args.dataset_name = "Houston_2013"
-# args.dataset_name = "Houston_2018"
+args.dataset_name = "Houston_2018"
 # args.dataset_name = "Augsburg"
 # args.dataset_name = "Berlin"
 # args.dataset_name = "MelasChasma"
@@ -52,7 +54,7 @@ args.dataset_name = "PaviaU"
 # args.dataset_name = "GaleCrater"
 
 # args.backbone = "MDL_M"
-args.backbone = "MDL_L"
+# args.backbone = "MDL_L"
 # args.backbone = "MDL_E_D"
 # args.backbone = "MDL_C"
 
@@ -64,6 +66,7 @@ args.backbone = "MDL_L"
 # args.backbone = "DSHFNet"
 # args.backbone = "MIViT"
 # args.backbone = "SHNet"
+args.backbone = "EMamba"
 
 # args.split_type = "disjoint"
 args.split_type = "ratio"
@@ -155,7 +158,7 @@ class_num = np.max(train_gt)
 print(class_num, train_gt.shape, len(train_loader.dataset))
 
 
-args.result_dir = os.path.join("/home/icclab/Documents/lqw/Multimodal_Classification/PatchwiseClsFra/result_PU_MD",
+args.result_dir = os.path.join("/home/icclab/Documents/lqw/Multimodal_Classification/PatchwiseClsFra/result",
                     datetime.now().strftime("%m-%d-%H-%M-") + args.backbone)
 print(args.result_dir)
 
@@ -248,6 +251,11 @@ elif args.backbone == "MIViT":
     loss_weight = loss_weight.to(args.device)
     criterion = focalLoss.FocalLoss(loss_weight, gamma=2, alpha=None)
 
+elif args.backbone == "EMamba":
+    model = MultimodalClassier(l1=data1_bands, l2=data2_bands,
+                         dim=data1_bands, num_classes=class_num).to(args.device)
+    params = model.parameters()
+    
 else:
     raise NotImplementedError("No models")
 print("backbone: ", args.backbone)
@@ -266,12 +274,20 @@ elif args.backbone == "S2ENet" \
 elif args.backbone == "DBCTNet":
 	print("marker3")
 	optimizer = optim.Adam(params, lr=args.learning_rate, weight_decay=args.weight_decay)
-	scheduler = get_cosine_schedule_with_warmup(optimizer, \
-				num_warmup_steps = 0.1*args.epochs*len(train_loader), \
-				num_training_steps = args.epochs*len(train_loader))
+
+    # warmup 10% epochs 或者 5%
+	scheduler = cosine_schedule_with_warmup.cosine_warmup_scheduler_epoch(optimizer, \
+				warmup_epochs = 0.1*args.epochs, \
+				total_epochs = args.epochs)
+
+elif args.backbone == "EMamba" or args.backbone == "SHNet":
+	print("marker4")
+	optimizer = optim.AdamW(params, lr=args.learning_rate, weight_decay=args.weight_decay)
+	scheduler = optim.lr_scheduler.StepLR(optimizer=optimizer, step_size=args.step_size, \
+                                       gamma=args.gamma, last_epoch=-1)
 
 
-
+early_stopping_counter = 0
 best_loss = 999
 best_acc = 0
 train_losses = []
@@ -337,9 +353,17 @@ for epoch in range(0, args.epochs):
         for i in range(len(row)):
             write.writerow(row[i])
 
-    best_loss, best_acc = tools.save_weights(train_loss, test_loss, best_loss, best_acc, \
-                                       test_accuracy, epoch, model, super_head, optimizer, args)
-        
+    best_loss, best_acc, early_stopping_counter = tools.save_weights(train_loss, test_loss, best_loss, best_acc, \
+                                       test_accuracy, epoch, model, super_head, optimizer, \
+                                       early_stopping_counter, args)
+
+
+    # 判断是否触发早停
+    if early_stopping_counter >= args.early_stopping_patience:
+        print("Early stopping triggered. Stopping training.")
+        # 跳出训练循环
+        break
+
 total_train_time = time.time() - total_train_time
 
 if super_head != None:
@@ -494,16 +518,17 @@ if args.plot_loss_curve:
     fig, ax1 = plt.subplots()
 
     # 绘制第一个数据，使用左侧y轴
-    ax1.plot(range(args.epochs), train_losses, 'blue', label="train_loss")
-    ax1.plot(range(args.epochs), test_losses, 'gray', label="test_loss")
+    # print("epoch", epoch, len(train_losses), len(test_losses))
+    ax1.plot(range(len(train_losses)), train_losses, 'blue', label="train_loss")
+    ax1.plot(range(len(test_losses)), test_losses, 'gray', label="test_loss")
     ax1.set_xlabel('X')
     ax1.set_ylabel('loss', color='b')
     ax1.tick_params(axis='y', labelcolor='b')
 
     # 创建第二个坐标轴，共享x轴但y轴在右侧
     ax2 = ax1.twinx()
-    ax2.plot(range(args.epochs), train_accuracies, 'red', label="train_accuracy")
-    ax2.plot(range(args.epochs), test_accuracies, 'pink', label="test_accuracy")
+    ax2.plot(range(len(train_accuracies)), train_accuracies, 'red', label="train_accuracy")
+    ax2.plot(range(len(test_accuracies)), test_accuracies, 'pink', label="test_accuracy")
     ax2.set_ylabel('accuracy', color='r')
     ax2.tick_params(axis='y', labelcolor='r')
 

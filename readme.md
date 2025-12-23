@@ -20,7 +20,7 @@
 | [MIViT](https://github.com/icey-zhang/MIViT)   | [Multimodal Informative ViT: Information Aggregation and Distribution for Hyperspectral and LiDAR Classification](https://ieeexplore-ieee-org.elibrary.jcu.edu.au/document/10464367)        | TCSVT       | 2024       |
 | [MS2CANet](https://github.com/junhengzhu/MS2CANet)   | [MS2CANet: Multiscale Spatial–Spectral Cross-Modal Attention Network for Hyperspectral Image and LiDAR Classification](https://ieeexplore-ieee-org.elibrary.jcu.edu.au/document/10382694/)        | TGRSL       | 2024       | 
 | [SHNet](https://github.com/quanweiliu/SHNet)   | [Enhancing Oil Spill Detection with Controlled Random Sampling: A Multimodal Fusion Approach Using SAR and HSI Imagery](https://www.sciencedirect.com/science/article/pii/S2352938525001545)        | RSA       | 2025       |
-
+| [E-Mamba](https://github.com/zhangyiyan001/E-Mamba)   | [E-Mamba: Efficient Mamba network for hyperspectral and LiDAR joint classification](https://www.sciencedirect.com/science/article/pii/S1566253525007213)        | IF       | 2025       |
 
 # Description
 This repository proposed a new taxonomy to descibe existed patch based image classification (semantic segmenation) models.
@@ -32,6 +32,7 @@ Of course, there are multiscale singlemodality input, singleoutput (MSISO) and m
 
 # Nomalization:
 1. MinMax normalization
+
 $$
 x_i' = \frac{x_i - \min(x)}{\max(x) - \min(x)}
 $$
@@ -43,6 +44,7 @@ $$
 - 对极值敏感
 
 2. Unit-norm normalization
+
 $$
 \mathbf{x'} = \frac{\mathbf{x}}{\|\mathbf{x}\|_2} = \frac{\mathbf{x}}{\sqrt{\sum_i x_i^2}}
 $$
@@ -53,6 +55,35 @@ $$
 - 强调方向信息（如光谱形状）
 - 不保留幅值大小
 > 在高光谱图像处理任务中，单位范数归一化更适合注重“光谱形状”的任务；而 Min-Max 更适合需要统一数值尺度或可视化展示的场景.但是要明确，**使用单位范数归一化的时候，不要使用降维**。
+
+
+# Environment
+
+Except for mamba, all of the codes can be run in latest pytorch. If you would like to run mamba-related models, plase follow below instruction.
+```python
+conda create -n Mamba python=3.9 -y
+conda activate Mamba
+
+python -m pip install -U pip setuptools wheel ninja cmake packaging
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118   (my cuda version)
+
+export CUDA_HOME=/usr/local/cuda-11.8
+export PATH=$CUDA_HOME/bin:$PATH
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+
+cd ./mamba/selective_scan_mu
+pip install -v --no-build-isolation .
+```
+
+If you met something wrong, please use run the following command:
+
+```python
+pip install -vvv --no-build-isolation . > build_log.txt 2>&1
+```
+
+Then open build_log.txt, search key words error: or fatal error. You will find the real error.
+
+
 
 # Tricks
 - 添加环境变量

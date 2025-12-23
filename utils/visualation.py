@@ -31,8 +31,8 @@ def visualation_SD_SSISO(net, net_head, data_loader, args, groundTruth=None, vis
             targets.append(target.cpu())
 
         test_accuracy = 100. * correct / len(data_loader.dataset)
-        print('Accuracy: {}/{} ({:.2f}%)\n'.format(
-                    correct, len(data_loader.dataset), test_accuracy))
+        # print('Accuracy: {}/{} ({:.2f}%)\n'.format(
+        #             correct, len(data_loader.dataset), test_accuracy))
         
     if visulation != None:
         hight, width = groundTruth.shape
@@ -76,8 +76,8 @@ def visualation_SD_SSISO2(net, data_loader, args, groundTruth=None, visulation=F
             targets.append(target.cpu())
 
         test_accuracy = 100. * correct / len(data_loader.dataset)
-        print('Accuracy: {}/{} ({:.2f}%)\n'.format(
-                    correct, len(data_loader.dataset), test_accuracy))
+        # print('Accuracy: {}/{} ({:.2f}%)\n'.format(
+        #             correct, len(data_loader.dataset), test_accuracy))
         
     if visulation != None:
         hight, width = groundTruth.shape
@@ -168,8 +168,8 @@ def visualation_SMIMO(net, superhead, data_loader, args, groundTruth=None, visul
             targets.append(target.cpu())
 
         test_accuracy = 100. * correct / len(data_loader.dataset)
-        print('Accuracy: {}/{} ({:.2f}%)\n'.format(
-                    correct, len(data_loader.dataset), test_accuracy))
+        # print('Accuracy: {}/{} ({:.2f}%)\n'.format(
+        #             correct, len(data_loader.dataset), test_accuracy))
         
     if visulation != None:
         hight, width = groundTruth.shape
@@ -266,8 +266,8 @@ def visualation_SMIMO2(net, data_loader, args, groundTruth=None, visulation=Fals
             targets.append(target.cpu())
 
         test_accuracy = 100. * correct / len(data_loader.dataset)
-        print('Accuracy: {}/{} ({:.2f}%)\n'.format(
-                    correct, len(data_loader.dataset), test_accuracy))
+        # print('Accuracy: {}/{} ({:.2f}%)\n'.format(
+        #             correct, len(data_loader.dataset), test_accuracy))
         
     if visulation != None:
         hight, width = groundTruth.shape
@@ -311,8 +311,8 @@ def visualation_SMIMO3(net, data_loader, args, groundTruth=None, visulation=Fals
             targets.append(target.cpu())
 
         test_accuracy = 100. * correct / len(data_loader.dataset)
-        print('Accuracy: {}/{} ({:.2f}%)\n'.format(
-                    correct, len(data_loader.dataset), test_accuracy))
+        # print('Accuracy: {}/{} ({:.2f}%)\n'.format(
+        #             correct, len(data_loader.dataset), test_accuracy))
         
     if visulation != None:
         hight, width = groundTruth.shape
@@ -356,8 +356,8 @@ def visualation_SMISO(net, data_loader, args, groundTruth=None, visulation=False
             targets.append(target.cpu())
 
         test_accuracy = 100. * correct / len(data_loader.dataset)
-        print('Accuracy: {}/{} ({:.2f}%)\n'.format(
-                    correct, len(data_loader.dataset), test_accuracy))
+        # print('Accuracy: {}/{} ({:.2f}%)\n'.format(
+        #             correct, len(data_loader.dataset), test_accuracy))
         
     if visulation != None:
         hight, width = groundTruth.shape
@@ -405,8 +405,8 @@ def visualation_MMISO(net, data_loader, args, groundTruth=None, visulation=False
             targets.append(target.cpu())
 
         test_accuracy = 100. * correct / len(data_loader.dataset)
-        print('Accuracy: {}/{} ({:.2f}%)\n'.format(
-                    correct, len(data_loader.dataset), test_accuracy))
+        # print('Accuracy: {}/{} ({:.2f}%)\n'.format(
+        #             correct, len(data_loader.dataset), test_accuracy))
         
     if visulation != None:
         hight, width = groundTruth.shape
@@ -466,8 +466,8 @@ def visualation_MMIMO(net, data_loader, args, groundTruth=None, visulation=False
             targets.append(target.cpu())
 
         test_accuracy = 100. * correct / len(data_loader.dataset)
-        print('Accuracy: {}/{} ({:.2f}%)\n'.format(
-                    correct, len(data_loader.dataset), test_accuracy))
+        # print('Accuracy: {}/{} ({:.2f}%)\n'.format(
+        #             correct, len(data_loader.dataset), test_accuracy))
         
     if visulation != None:
         hight, width = groundTruth.shape

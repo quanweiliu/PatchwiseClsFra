@@ -523,6 +523,7 @@ def train_SMISO(epoch, net, criterion, train_loader, test_loader, optimizer, arg
     start_time = time.time()
     net.train()
     for pos_1, pos_2, label in train_loader:
+        # print("pos_1", pos_1.shape, "pos_2", pos_2.shape)
 
         label = label - 1
         pos_1  = pos_1.to(args.device)

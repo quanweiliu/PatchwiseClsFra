@@ -39,7 +39,7 @@ def get_args():
                         help='MultiModality data')
     
     # model
-    parser.add_argument('--SSISO',  nargs='+', default=["vit", 'cnn', 'mamba'], 
+    parser.add_argument('--SSISO',  nargs='+', default=["vit", 'cnn'], 
                         help='singlesacle singlemodality input and singleoutput')
     parser.add_argument('--SSISO2',  nargs='+', default=['ViTDGCN', 'FDGC', "SSFTTnet", \
                                                          "morphFormer", "DBCTNet", "DSFormer"], 
@@ -49,8 +49,8 @@ def get_args():
     
     
     parser.add_argument('--SMISO',  nargs='+', default=['S2ENet', 'FusAtNet', 'CrossHL', \
-                                                        'HCTNet', 'SHNet', \
-                                                        "MDL_M", "MDL_L", "EndNet"], 
+                                                        'HCTNet', 'SHNet', "MDL_M",\
+                                                        "MDL_L", "EndNet", "EMamba"], 
                         help='singlesacle multimodelity input and singleoutput')
     parser.add_argument('--SMIMO',  nargs='+', default=["MS2CANet"], 
                         help='singlesacle multimodelity input and multioutput')

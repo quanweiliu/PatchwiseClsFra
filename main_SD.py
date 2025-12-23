@@ -22,7 +22,7 @@ from loadData import data_pipe
 from loadData.dataAugmentation import dataAugmentation
 
 # SD models
-from models import CNNs, vision_transformer, mamba
+from models import CNNs, vision_transformer
 from models import ViTDGCN, FDGC, DBCTNet
 from models import SSFTTnet, morphFormer
 from transformers import get_cosine_schedule_with_warmup
@@ -54,7 +54,6 @@ args.dataset_name = "PaviaU"
 
 # args.backbone = "vit"
 # args.backbone = "cnn"
-# args.backbone = "mamba"
 args.backbone = "FDGC"
 # args.backbone = "ViTDGCN"
 # args.backbone = "SSFTTnet"
@@ -202,24 +201,6 @@ elif args.backbone == "FDGC":
                             num_classes=class_num).to(args.device)
     params = model.parameters()
     print("model: ", "FDGC")
-
-elif args.backbone == "mamba":
-    model = mamba.Vim(
-        dim=64,  # Dimension of the transformer model
-        # heads=8,  # Number of attention heads
-        dt_rank=32,  # Rank of the dynamic routing matrix
-        dim_inner=64,  # Inner dimension of the transformer model
-        d_state=64,  # Dimension of the state vector
-        num_classes=10,  # Number of output classes
-        image_size=args.randomCrop,  # Size of the input image
-        patch_size=4,  # Size of each image patch
-        channels=args.components,  # Number of input channels
-        dropout=0.1,  # Dropout rate
-        depth=4,  # Depth of the transformer model
-    ).to(args.device)
-    args.feature_dim = 64
-    super_head = heads.FDGC_head(args.feature_dim, class_num=class_num).to(args.device)
-    params = list(super_head.parameters())  + list(model.parameters())
 
 elif args.backbone == "SSFTTnet":
     model = SSFTTnet.SSFTTnet(1, num_classes=class_num).to(args.device)

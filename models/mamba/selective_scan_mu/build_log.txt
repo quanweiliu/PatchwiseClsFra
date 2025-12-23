@@ -1,0 +1,131 @@
+Using pip 25.3 from /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages/pip (python 3.9)
+Non-user install because site-packages writeable
+Disabling truststore because Python version isn't 3.10+
+Created temporary directory: /tmp/pip-build-tracker-adwexxai
+Initialized build tracking at /tmp/pip-build-tracker-adwexxai
+Created build tracker: /tmp/pip-build-tracker-adwexxai
+Entered build tracker: /tmp/pip-build-tracker-adwexxai
+Created temporary directory: /tmp/pip-install-vojukvfk
+Created temporary directory: /tmp/pip-ephem-wheel-cache-4tnp9gqu
+Processing /home/icclab/Documents/lqw/Multimodal_Classification/PatchwiseClsFra/models/mamba/selective_scan_mu
+  Added file:///home/icclab/Documents/lqw/Multimodal_Classification/PatchwiseClsFra/models/mamba/selective_scan_mu to build tracker '/tmp/pip-build-tracker-adwexxai'
+  Created temporary directory: /tmp/pip-modern-metadata-9lpny6e3
+  Preparing metadata (pyproject.toml): started
+  Running command Preparing metadata (pyproject.toml)
+  /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+  !!
+
+          ********************************************************************************
+          Please consider removing the following classifiers in favor of a SPDX license expression:
+
+          License :: OSI Approved :: BSD License
+
+          See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+          ********************************************************************************
+
+  !!
+    self._finalize_license_expression()
+
+
+  torch.__version__  = 2.7.1+cu118
+
+
+  running dist_info
+  creating /tmp/pip-modern-metadata-9lpny6e3/selective_scan.egg-info
+  writing /tmp/pip-modern-metadata-9lpny6e3/selective_scan.egg-info/PKG-INFO
+  writing dependency_links to /tmp/pip-modern-metadata-9lpny6e3/selective_scan.egg-info/dependency_links.txt
+  writing requirements to /tmp/pip-modern-metadata-9lpny6e3/selective_scan.egg-info/requires.txt
+  writing top-level names to /tmp/pip-modern-metadata-9lpny6e3/selective_scan.egg-info/top_level.txt
+  writing manifest file '/tmp/pip-modern-metadata-9lpny6e3/selective_scan.egg-info/SOURCES.txt'
+  reading manifest file '/tmp/pip-modern-metadata-9lpny6e3/selective_scan.egg-info/SOURCES.txt'
+  writing manifest file '/tmp/pip-modern-metadata-9lpny6e3/selective_scan.egg-info/SOURCES.txt'
+  creating '/tmp/pip-modern-metadata-9lpny6e3/selective_scan-0.0.1.dist-info'
+  Preparing metadata (pyproject.toml): finished with status 'done'
+  Source in /home/icclab/Documents/lqw/Multimodal_Classification/PatchwiseClsFra/models/mamba/selective_scan_mu has version 0.0.1, which satisfies requirement selective_scan==0.0.1 from file:///home/icclab/Documents/lqw/Multimodal_Classification/PatchwiseClsFra/models/mamba/selective_scan_mu
+  Removed selective_scan==0.0.1 from file:///home/icclab/Documents/lqw/Multimodal_Classification/PatchwiseClsFra/models/mamba/selective_scan_mu from build tracker '/tmp/pip-build-tracker-adwexxai'
+Requirement already satisfied: torch in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from selective_scan==0.0.1) (2.7.1+cu118)
+Requirement already satisfied: packaging in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from selective_scan==0.0.1) (25.0)
+Requirement already satisfied: ninja in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from selective_scan==0.0.1) (1.13.0)
+Requirement already satisfied: einops in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from selective_scan==0.0.1) (0.8.1)
+Requirement already satisfied: filelock in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (3.19.1)
+Requirement already satisfied: typing-extensions>=4.10.0 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (4.15.0)
+Requirement already satisfied: sympy>=1.13.3 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (1.14.0)
+Requirement already satisfied: networkx in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (3.2.1)
+Requirement already satisfied: jinja2 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (3.1.6)
+Requirement already satisfied: fsspec in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (2025.10.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu11==11.8.89 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (11.8.89)
+Requirement already satisfied: nvidia-cuda-runtime-cu11==11.8.89 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (11.8.89)
+Requirement already satisfied: nvidia-cuda-cupti-cu11==11.8.87 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (11.8.87)
+Requirement already satisfied: nvidia-cudnn-cu11==9.1.0.70 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (9.1.0.70)
+Requirement already satisfied: nvidia-cublas-cu11==11.11.3.6 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (11.11.3.6)
+Requirement already satisfied: nvidia-cufft-cu11==10.9.0.58 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (10.9.0.58)
+Requirement already satisfied: nvidia-curand-cu11==10.3.0.86 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (10.3.0.86)
+Requirement already satisfied: nvidia-cusolver-cu11==11.4.1.48 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (11.4.1.48)
+Requirement already satisfied: nvidia-cusparse-cu11==11.7.5.86 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (11.7.5.86)
+Requirement already satisfied: nvidia-nccl-cu11==2.21.5 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (2.21.5)
+Requirement already satisfied: nvidia-nvtx-cu11==11.8.86 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (11.8.86)
+Requirement already satisfied: triton==3.3.1 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from torch->selective_scan==0.0.1) (3.3.1)
+Requirement already satisfied: setuptools>=40.8.0 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from triton==3.3.1->torch->selective_scan==0.0.1) (80.9.0)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from sympy>=1.13.3->torch->selective_scan==0.0.1) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages (from jinja2->torch->selective_scan==0.0.1) (2.1.5)
+Created temporary directory: /tmp/pip-unpack-xxjjhbq7
+Building wheels for collected packages: selective_scan
+  Destination directory: /tmp/pip-ephem-wheel-cache-4tnp9gqu/wheels/39/2a/f3/e660597235c900e4d28bac672ce45a6b3ba6b82129c57a5131/tmpzsf737wa
+  Building wheel for selective_scan (pyproject.toml): started
+  Running command Building wheel for selective_scan (pyproject.toml)
+  /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages/setuptools/dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+  !!
+
+          ********************************************************************************
+          Please consider removing the following classifiers in favor of a SPDX license expression:
+
+          License :: OSI Approved :: BSD License
+
+          See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+          ********************************************************************************
+
+  !!
+    self._finalize_license_expression()
+
+
+  torch.__version__  = 2.7.1+cu118
+
+
+  running bdist_wheel
+  running build
+  running build_ext
+  /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages/torch/utils/cpp_extension.py:490: UserWarning: There are no g++ version bounds defined for CUDA version 11.8
+    warnings.warn(f'There are no {compiler_name} version bounds defined for CUDA version {cuda_str_version}')
+  building 'selective_scan_cuda_core' extension
+  error: unknown file type '' (from 'csrc/selective_scan/selective_scancpp')
+  error: subprocess-exited-with-error
+  
+  × Building wheel for selective_scan (pyproject.toml) did not run successfully.
+  │ exit code: 1
+  ╰─> No available output.
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+  full command: /home/icclab/miniconda3/envs/mamba/bin/python3.9 /home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py build_wheel /tmp/tmpxx8884uw
+  cwd: /home/icclab/Documents/lqw/Multimodal_Classification/PatchwiseClsFra/models/mamba/selective_scan_mu
+  Building wheel for selective_scan (pyproject.toml): finished with status 'error'
+  ERROR: Failed building wheel for selective_scan
+Failed to build selective_scan
+Remote version of pip: 25.3
+Local version of pip:  25.3
+Was pip installed by pip? False
+error: failed-wheel-build-for-install
+
+× Failed to build installable wheels for some pyproject.toml based projects
+╰─> selective_scan
+Exception information:
+Traceback (most recent call last):
+  File "/home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages/pip/_internal/cli/base_command.py", line 107, in _run_wrapper
+    status = _inner_run()
+  File "/home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages/pip/_internal/cli/base_command.py", line 98, in _inner_run
+    return self.run(options, args)
+  File "/home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages/pip/_internal/cli/req_command.py", line 85, in wrapper
+    return func(self, options, args)
+  File "/home/icclab/miniconda3/envs/mamba/lib/python3.9/site-packages/pip/_internal/commands/install.py", line 440, in run
+    raise InstallWheelBuildError(build_failures)
+pip._internal.exceptions.InstallWheelBuildError: <InstallWheelBuildError: failed-wheel-build-for-install>
+Removed build tracker: '/tmp/pip-build-tracker-adwexxai'

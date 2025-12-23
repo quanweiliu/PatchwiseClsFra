@@ -264,6 +264,18 @@ def get_model_config(args):
 		args.gamma = 0.9
 		args.fusion = 'TTOA'
 		args.pred_flag = 'o_fuse'
+
+	elif args.backbone == "EMamba":
+		args.epochs = 300
+		args.patch_size = 9
+		args.batch_size = 128
+		args.pca = False
+		args.components = 0
+		args.learning_rate = 0.0003
+		args.weight_decay = 0.0001
+		args.schedule = True
+		args.step_size = 30
+		args.gamma = 0.5
 		
 	else:
 		raise ValueError(f"Unsupported backbone: {args.backbone}")
