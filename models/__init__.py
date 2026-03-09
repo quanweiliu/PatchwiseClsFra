@@ -279,3 +279,104 @@ def get_model_config(args):
 		
 	else:
 		raise ValueError(f"Unsupported backbone: {args.backbone}")
+	
+
+
+from . import S2ENet, FusAtNet, SHNet, heads, MDL
+# from models.MS2CANet import pymodel
+from .MS2CANet2 import pymodel
+from .CrossHL import CrossHL
+from .HCTNet import HCTNet
+from .DSHFNet import DSHF
+from .MIViT import MMA
+from .mamba.vmamba import MultimodalClassier
+
+
+def get_model(data1_bands, data2_bands, class_num, args):
+	if args.backbone == "MDL_M":
+		model = MDL.Middle_fusion_CNN(data1_bands, data2_bands, class_num).to(args.device)
+		params = model.parameters()
+		print("model: ", "MDL_M")
+
+	elif  args.backbone == "MDL_L":
+		model = MDL.Late_fusion_CNN(data1_bands, data2_bands, class_num).to(args.device)
+		params = model.parameters()
+		print("model: ", "MDL_L")
+
+	elif args.backbone == "MDL_E_D":
+		model = MDL.En_De_fusion_CNN(data1_bands, data2_bands, class_num).to(args.device)
+		params = model.parameters()
+		print("model: ", "MDL_E_D")
+
+	elif  args.backbone == "MDL_C":
+		model = MDL.Cross_fusion_CNN(data1_bands, data2_bands, class_num).to(args.device)
+		params = model.parameters()
+		print("model: ", "MDL_C")
+
+	elif args.backbone == "MS2CANet":
+		FM = 64
+		args.feature_dim = 256
+		para_tune = False
+		if args.dataset_name == "Houston_2013":
+			para_tune = True                # para_tune 这个参数对于 Houston 的提升有两个点！！
+
+		# model = pymodel.pyCNN(data1_bands, data2_bands, classes=class_num, \
+		#                       FM=FM, para_tune=para_tune).to(args.device)
+		# params = model.parameters()
+
+		model = pymodel.pyCNN(data1_bands, data2_bands, FM=FM, para_tune=para_tune).to(args.device)
+		# super_head = heads.MS2_head(args.feature_dim, class_num=class_num).to(args.device)
+		# params = list(super_head.parameters())  + list(model.parameters())
+
+	elif args.backbone == 'S2ENet':
+		model = S2ENet.S2ENet(data1_bands, data2_bands, class_num, \
+								patch_size=args.patch_size).to(args.device)
+		params = model.parameters()
+
+	elif args.backbone == "FusAtNet":
+		model = FusAtNet.FusAtNet(data1_bands, data2_bands, class_num).to(args.device)
+		params = model.parameters()
+
+	elif args.backbone == "CrossHL":
+		FM = 16
+		model = CrossHL.CrossHL_Transformer(FM, data1_bands, data2_bands, class_num, \
+											args.patch_size).to(args.device)
+		params = model.parameters()
+
+	elif args.backbone == "HCTNet":
+		model = HCTNet(in_channels=1, num_classes=class_num).to(args.device)
+		params = model.parameters()
+
+	elif args.backbone == "SHNet":
+		FM = 64
+		# FM = 16
+		model = SHNet.SHNet(data1_bands, data2_bands, feature=FM, \
+							num_classes=class_num, factors=args.factors).to(args.device)
+		params = model.parameters()
+
+	elif args.backbone == "DSHFNet":
+		model = DSHF(l1=data1_bands, l2=data2_bands, \
+					num_classes=class_num, encoder_embed_dim=64).to(args.device)
+		params = model.parameters()
+
+	elif args.backbone == "MIViT":
+		model = MMA.MMA(l1=data1_bands, l2=data2_bands, patch_size=args.patch_size, \
+					num_patches=64, num_classes=class_num,
+					encoder_embed_dim=64, decoder_embed_dim=32, en_depth=5, \
+					en_heads=4, de_depth=5, de_heads=4, mlp_dim=8, dropout=0.1, \
+					emb_dropout=0.1,fusion=args.fusion).to(args.device)
+		params = model.parameters()
+		
+		# criterion = FocalLoss(loss_weight, gamma=2, alpha=None)
+
+	elif args.backbone == "EMamba":
+		model = MultimodalClassier(l1=data1_bands, l2=data2_bands,
+							dim=data1_bands, num_classes=class_num).to(args.device)
+		params = model.parameters()
+		
+	else:
+		raise NotImplementedError("No models")
+	print("backbone: ", args.backbone)
+
+	return model, params
+

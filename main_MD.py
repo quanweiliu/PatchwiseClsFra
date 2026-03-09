@@ -20,23 +20,24 @@ plt.rc('font',family='Times New Roman')
 from option import opt
 from loadData import data_pipe
 from loadData.dataAugmentation import dataAugmentation
-
-# SD models
-from models import CNNs, vision_transformer
-from models import ViTDGCN, FDGC, DBCTNet
-from models import SSFTTnet, morphFormer
 # from transformers import get_cosine_schedule_with_warmup
 
+from models import heads
+# SD models
+# from models import CNNs, vision_transformer
+# from models import ViTDGCN, FDGC, DBCTNet
+# from models import SSFTTnet, morphFormer
+
 # MD models
-from models import S2ENet, FusAtNet, SHNet, heads, MDL
+# from models import S2ENet, FusAtNet, SHNet, MDL
 # from models.MS2CANet import pymodel
-from models.MS2CANet2 import pymodel
-from models.CrossHL import CrossHL
-from models.HCTNet import HCTNet
-from models.DSHFNet import DSHF
-from models.MIViT import MMA
-from models.mamba.vmamba import MultimodalClassier
-from models import get_model_config
+# from models.MS2CANet2 import pymodel
+# from models.CrossHL import CrossHL
+# from models.HCTNet import HCTNet
+# from models.DSHFNet import DSHF
+# from models.MIViT import MMA
+# from models.mamba.vmamba import MultimodalClassier
+from models import get_model_config, get_model
 
 from utils import trainer, tester, focalLoss, tools, visualation
 from utils import cosine_schedule_with_warmup
@@ -46,9 +47,9 @@ from utils import cosine_schedule_with_warmup
 args = opt.get_args()
 # args.dataset_name = "PaviaU"
 # args.dataset_name = "Houston_2013"
-args.dataset_name = "Houston_2018"
+# args.dataset_name = "Houston_2018"
 # args.dataset_name = "Augsburg"
-# args.dataset_name = "Berlin"
+args.dataset_name = "Berlin"
 # args.dataset_name = "MelasChasma"
 # args.dataset_name = "CopratesChasma"
 # args.dataset_name = "GaleCrater"
@@ -64,9 +65,9 @@ args.dataset_name = "Houston_2018"
 # args.backbone = "CrossHL"
 # args.backbone = "HCTNet"
 # args.backbone = "DSHFNet"
-# args.backbone = "MIViT"
+args.backbone = "MIViT"
 # args.backbone = "SHNet"
-args.backbone = "EMamba"
+# args.backbone = "EMamba"
 
 # args.split_type = "disjoint"
 args.split_type = "ratio"
@@ -125,7 +126,7 @@ if args.backbone in args.MMISO or args.backbone in args.MMIMO:
     train_gt_pure = train_gt[train_gt > 0] - 1
     val_gt_pure = val_gt[val_gt > 0] - 1
     # test_gt_pure = test_gt[test_gt > 0] - 1
-    loss_weight = focalLoss.loss_weight_calculation(train_gt_pure, args)
+    loss_weight = focalLoss.loss_weight_calculation(train_gt_pure, args).to(args.device)
     print("loss_weight", loss_weight)
     print("data1", train_dataset.data1.shape, "data2", train_dataset.data2.shape)
 
@@ -173,92 +174,98 @@ with open(args.result_dir + '/args.json', 'w') as fid:
 criterion = torch.nn.CrossEntropyLoss()
 super_head = None
 
-
-if args.backbone == "MDL_M":
-    model = MDL.Middle_fusion_CNN(data1_bands, data2_bands, class_num).to(args.device)
-    params = model.parameters()
-    print("model: ", "MDL_M")
-
-elif  args.backbone == "MDL_L":
-    model = MDL.Late_fusion_CNN(data1_bands, data2_bands, class_num).to(args.device)
-    params = model.parameters()
-    print("model: ", "MDL_L")
-
-elif args.backbone == "MDL_E_D":
-    model = MDL.En_De_fusion_CNN(data1_bands, data2_bands, class_num).to(args.device)
-    params = model.parameters()
-    print("model: ", "MDL_E_D")
-
-elif  args.backbone == "MDL_C":
-    model = MDL.Cross_fusion_CNN(data1_bands, data2_bands, class_num).to(args.device)
-    params = model.parameters()
-    print("model: ", "MDL_C")
-
-elif args.backbone == "MS2CANet":
-    FM = 64
-    args.feature_dim = 256
-    para_tune = False
-    if args.dataset_name == "Houston_2013":
-        para_tune = True                # para_tune 这个参数对于 Houston 的提升有两个点！！
-
-    # model = pymodel.pyCNN(data1_bands, data2_bands, classes=class_num, \
-    #                       FM=FM, para_tune=para_tune).to(args.device)
-    # params = model.parameters()
-
-    model = pymodel.pyCNN(data1_bands, data2_bands, FM=FM, para_tune=para_tune).to(args.device)
+model, params = get_model(data1_bands, data2_bands, class_num, args)
+if args.backbone == "MIViT":
+    criterion = focalLoss.FocalLoss(loss_weight, gamma=2, alpha=None)
+if args.backbone == "MS2CANet":
     super_head = heads.MS2_head(args.feature_dim, class_num=class_num).to(args.device)
     params = list(super_head.parameters())  + list(model.parameters())
 
-elif args.backbone == 'S2ENet':
-    model = S2ENet.S2ENet(data1_bands, data2_bands, class_num, \
-                            patch_size=args.patch_size).to(args.device)
-    params = model.parameters()
+# if args.backbone == "MDL_M":
+#     model = MDL.Middle_fusion_CNN(data1_bands, data2_bands, class_num).to(args.device)
+#     params = model.parameters()
+#     print("model: ", "MDL_M")
 
-elif args.backbone == "FusAtNet":
-    model = FusAtNet.FusAtNet(data1_bands, data2_bands, class_num).to(args.device)
-    params = model.parameters()
+# elif  args.backbone == "MDL_L":
+#     model = MDL.Late_fusion_CNN(data1_bands, data2_bands, class_num).to(args.device)
+#     params = model.parameters()
+#     print("model: ", "MDL_L")
 
-elif args.backbone == "CrossHL":
-    FM = 16
-    model = CrossHL.CrossHL_Transformer(FM, data1_bands, data2_bands, class_num, \
-                                        args.patch_size).to(args.device)
-    params = model.parameters()
+# elif args.backbone == "MDL_E_D":
+#     model = MDL.En_De_fusion_CNN(data1_bands, data2_bands, class_num).to(args.device)
+#     params = model.parameters()
+#     print("model: ", "MDL_E_D")
 
-elif args.backbone == "HCTNet":
-    model = HCTNet(in_channels=1, num_classes=class_num).to(args.device)
-    params = model.parameters()
+# elif  args.backbone == "MDL_C":
+#     model = MDL.Cross_fusion_CNN(data1_bands, data2_bands, class_num).to(args.device)
+#     params = model.parameters()
+#     print("model: ", "MDL_C")
 
-elif args.backbone == "SHNet":
-    FM = 64
-    # FM = 16
-    model = SHNet.SHNet(data1_bands, data2_bands, feature=FM, \
-                        num_classes=class_num, factors=args.factors).to(args.device)
-    params = model.parameters()
+# elif args.backbone == "MS2CANet":
+#     FM = 64
+#     args.feature_dim = 256
+#     para_tune = False
+#     if args.dataset_name == "Houston_2013":
+#         para_tune = True                # para_tune 这个参数对于 Houston 的提升有两个点！！
 
-elif args.backbone == "DSHFNet":
-    model = DSHF(l1=data1_bands, l2=data2_bands, \
-                num_classes=class_num, encoder_embed_dim=64).to(args.device)
-    params = model.parameters()
+#     # model = pymodel.pyCNN(data1_bands, data2_bands, classes=class_num, \
+#     #                       FM=FM, para_tune=para_tune).to(args.device)
+#     # params = model.parameters()
 
-elif args.backbone == "MIViT":
-    model = MMA.MMA(l1=data1_bands, l2=data2_bands, patch_size=args.patch_size, \
-                num_patches=64, num_classes=class_num,
-                encoder_embed_dim=64, decoder_embed_dim=32, en_depth=5, \
-                en_heads=4, de_depth=5, de_heads=4, mlp_dim=8, dropout=0.1, \
-                emb_dropout=0.1,fusion=args.fusion).to(args.device)
-    params = model.parameters()
+#     model = pymodel.pyCNN(data1_bands, data2_bands, FM=FM, para_tune=para_tune).to(args.device)
+#     super_head = heads.MS2_head(args.feature_dim, class_num=class_num).to(args.device)
+#     params = list(super_head.parameters())  + list(model.parameters())
+
+# elif args.backbone == 'S2ENet':
+#     model = S2ENet.S2ENet(data1_bands, data2_bands, class_num, \
+#                             patch_size=args.patch_size).to(args.device)
+#     params = model.parameters()
+
+# elif args.backbone == "FusAtNet":
+#     model = FusAtNet.FusAtNet(data1_bands, data2_bands, class_num).to(args.device)
+#     params = model.parameters()
+
+# elif args.backbone == "CrossHL":
+#     FM = 16
+#     model = CrossHL.CrossHL_Transformer(FM, data1_bands, data2_bands, class_num, \
+#                                         args.patch_size).to(args.device)
+#     params = model.parameters()
+
+# elif args.backbone == "HCTNet":
+#     model = HCTNet(in_channels=1, num_classes=class_num).to(args.device)
+#     params = model.parameters()
+
+# elif args.backbone == "SHNet":
+#     FM = 64
+#     # FM = 16
+#     model = SHNet.SHNet(data1_bands, data2_bands, feature=FM, \
+#                         num_classes=class_num, factors=args.factors).to(args.device)
+#     params = model.parameters()
+
+# elif args.backbone == "DSHFNet":
+#     model = DSHF(l1=data1_bands, l2=data2_bands, \
+#                 num_classes=class_num, encoder_embed_dim=64).to(args.device)
+#     params = model.parameters()
+
+# elif args.backbone == "MIViT":
+#     model = MMA.MMA(l1=data1_bands, l2=data2_bands, patch_size=args.patch_size, \
+#                 num_patches=64, num_classes=class_num,
+#                 encoder_embed_dim=64, decoder_embed_dim=32, en_depth=5, \
+#                 en_heads=4, de_depth=5, de_heads=4, mlp_dim=8, dropout=0.1, \
+#                 emb_dropout=0.1,fusion=args.fusion).to(args.device)
+#     params = model.parameters()
     
-    loss_weight = loss_weight.to(args.device)
-    criterion = focalLoss.FocalLoss(loss_weight, gamma=2, alpha=None)
+#     loss_weight = loss_weight.to(args.device)
+#     criterion = focalLoss.FocalLoss(loss_weight, gamma=2, alpha=None)
 
-elif args.backbone == "EMamba":
-    model = MultimodalClassier(l1=data1_bands, l2=data2_bands,
-                         dim=data1_bands, num_classes=class_num).to(args.device)
-    params = model.parameters()
+# elif args.backbone == "EMamba":
+#     model = MultimodalClassier(l1=data1_bands, l2=data2_bands,
+#                          dim=data1_bands, num_classes=class_num).to(args.device)
+#     params = model.parameters()
     
-else:
-    raise NotImplementedError("No models")
-print("backbone: ", args.backbone)
+# else:
+#     raise NotImplementedError("No models")
+# print("backbone: ", args.backbone)
 
 
 if not args.schedule:
@@ -280,7 +287,7 @@ elif args.backbone == "DBCTNet":
 				warmup_epochs = 0.1*args.epochs, \
 				total_epochs = args.epochs)
 
-elif args.backbone == "EMamba" or args.backbone == "SHNet":
+elif args.backbone == "EMamba" or args.backbone == "SHNet" or args.backbone == "MIViT":
 	print("marker4")
 	optimizer = optim.AdamW(params, lr=args.learning_rate, weight_decay=args.weight_decay)
 	scheduler = optim.lr_scheduler.StepLR(optimizer=optimizer, step_size=args.step_size, \
